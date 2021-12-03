@@ -1,0 +1,15 @@
+import pkg from 'mongoose';
+const { connect } = pkg;
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://admin:123456@20.119.42.13:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false';
+
+connect(MONGODB_URI, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+})
+	.then(() => {
+		console.log('Database connection successful');
+	})
+	.catch(err => {
+		console.error(err);
+	});
