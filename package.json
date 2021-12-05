@@ -24,6 +24,7 @@
 		"apollo-server": "^3.5.0",
 		"graphql": "^15.7.2",
 		"mongoose": "^6.0.14",
+		"mongoose-autopopulate": "^0.16.0",
 		"mongoose-unique-validator": "^3.0.0"
 	}
 }

@@ -9,25 +9,27 @@ const typeDefs = gql`
 	type User {
 		id: ID!
 		name: String!
-		Role: Role!
+		role: Role!
 		clientInfo: ClientInfo
+		email: String!
+		password: String!
+		createdAt: String!
+		updatedAt: String!
 	}
 
 	type ClientInfo {
-		id: ID!
-		user: User!
 		identification: String!
 		birthDate: String!
 		revenueValue: Float!
-		ExpensesValue: Float!
+		expensesValue: Float!
 	}
 
 	type CreditRequest {
 		id: ID!
 		client: User!
-		Fees: Int!
-		Amount: Int!
-		Date: String!
+		fees: Int!
+		amount: Int!
+		createdAt: String!
 	}
 
 	type CreditResponse {
@@ -36,6 +38,7 @@ const typeDefs = gql`
 		admin: User!
 		message: String!
 		isApproved: Boolean!
+		createdAt: String!
 	}
 
 	type CreditState {
@@ -77,60 +80,80 @@ const typeDefs = gql`
 		isApproved: Boolean!
 	}
 
+	input RoleInput {
+		name: String!
+	}
+
+	input ClientInfoInput {
+		identification: String
+		birthDate: String
+		revenueValue: Float
+		expensesValue: Float
+	}
+
+	input UserInput {
+		name: String
+		email: String
+		password: String
+		role: ID
+		clientInfo: ClientInfoInput
+	}
+
+	input CreditRequestInput {
+		client: ID
+		fees: Int
+		amount: Int
+		createdAt: String
+	}
+
+	input CreditResponseInput {
+		creditRequest: ID
+		admin: ID
+		message: String
+		isApproved: Boolean
+	}
+
+	input CreditStateInput {
+		name: String
+		color: String
+	}
+
 	type Query {
-		getUser(id: ID!): User
-		getUsers: [User]
 		getRole(id: ID!): Role
 		getRoles: [Role]
-		getClientInfo(id: ID!): ClientInfo
-		getClientInfos: [ClientInfo]
+
+		getUser(id: ID!): User
+		getUsers: [User]
+
 		getCreditRequest(id: ID!): CreditRequest
 		getCreditRequests: [CreditRequest]
+		getCreditRequestsByClient(client: ID!): [CreditRequest]
+
 		getCreditResponse(id: ID!): CreditResponse
+		getCreditResponseByCreditRequest(creditRequest: ID!): [CreditResponse]
 		getCreditResponses: [CreditResponse]
+		getCreditResponsesByClient(client: ID!): [CreditResponse]
+
 		getCreditState(id: ID!): CreditState
 		getCreditStates: [CreditState]
-		getCredit(id: ID!): Credit
-		getCredits: [Credit]
-		getPayment(id: ID!): Payment
-		getPayments: [Payment]
-		getExtensionRequest(id: ID!): ExtensionRequest
-		getExtensionRequests: [ExtensionRequest]
-		getExtensionResponse(id: ID!): ExtensionResponse
-		getExtensionResponses: [ExtensionResponse]
 	}
 
 	type Mutation {
-		createUser(name: String!, Role: ID!): User
-		updateUser(id: ID!, name: String, Role: ID): User
-		deleteUser(id: ID!): User
-		createRole(name: String!): Role
-		updateRole(id: ID!, name: String!): Role
+		createRole(role: RoleInput!): Role
+		updateRole(id: ID!, role: RoleInput!): Role
 		deleteRole(id: ID!): Role
-		createClientInfo(user: ID!, identification: String!, birthDate: String!, revenueValue: Float!, ExpensesValue: Float!): ClientInfo
-		updateClientInfo(id: ID!, user: ID, identification: String, birthDate: String, revenueValue: Float, ExpensesValue: Float): ClientInfo
-		deleteClientInfo(id: ID!): ClientInfo
-		createCreditRequest(client: ID!, Fees: Int!, Amount: Int!, Date: String!): CreditRequest
-		updateCreditRequest(id: ID!, client: ID, Fees: Int, Amount: Int, Date: String): CreditRequest
+
+		createUser(user: UserInput!): User
+		updateUser(id: ID!, user: UserInput!): User
+		deleteUser(id: ID!): User
+
+		createCreditRequest(creditRequest: CreditRequestInput!): CreditRequest
+		updateCreditRequest(id: ID!, creditRequest: CreditRequestInput!): CreditRequest
 		deleteCreditRequest(id: ID!): CreditRequest
-		createCreditResponse(creditRequest: ID!, admin: ID!, message: String!, isApproved: Boolean!): CreditResponse
-		updateCreditResponse(id: ID!, creditRequest: ID, admin: ID, message: String, isApproved: Boolean): CreditResponse
+
+		createCreditResponse(creditResponse: CreditResponseInput!): CreditResponse
+		updateCreditResponse(id: ID!, creditResponse: CreditResponseInput!): CreditResponse
 		deleteCreditResponse(id: ID!): CreditResponse
-		createCreditState(name: String!, color: String!): CreditState
-		updateCreditState(id: ID!, name: String, color: String): CreditState
-		deleteCreditState(id: ID!): CreditState
-		createCredit(creditResponse: ID!, startDate: String!, nextPaymentDate: String!, creditState: ID!, interestRate: Float!): Credit
-		updateCredit(id: ID!, creditResponse: ID, startDate: String, nextPaymentDate: String, creditState: ID, interestRate: Float): Credit
-		deleteCredit(id: ID!): Credit
-		createPayment(credit: ID!, date: String!, amount: Float!): Payment
-		updatePayment(id: ID!, credit: ID, date: String, amount: Float): Payment
-		deletePayment(id: ID!): Payment
-		createExtensionRequest(credit: ID!, date: String!, reason: String!, fees: Int!): ExtensionRequest
-		updateExtensionRequest(id: ID!, credit: ID, date: String, reason: String, fees: Int): ExtensionRequest
-		deleteExtensionRequest(id: ID!): ExtensionRequest
-		createExtensionResponse(extensionRequest: ID!, date: String!, admin: ID!, message: String!, isApproved: Boolean!): ExtensionResponse
-		updateExtensionResponse(id: ID!, extensionRequest: ID, date: String, admin: ID, message: String, isApproved: Boolean): ExtensionResponse
-		deleteExtensionResponse(id: ID!): ExtensionResponse
 	}
 `;
 
