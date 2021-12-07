@@ -29,6 +29,7 @@ const typeDefs = gql`
 		client: User!
 		fees: Int!
 		amount: Int!
+		interest: Float!
 		createdAt: String!
 	}
 
@@ -53,7 +54,6 @@ const typeDefs = gql`
 		startDate: String!
 		nextPaymentDate: String!
 		creditState: CreditState!
-		interestRate: Float!
 	}
 
 	type Payment {
@@ -103,6 +103,7 @@ const typeDefs = gql`
 		client: ID
 		fees: Int
 		amount: Int
+		interest: Float
 		createdAt: String
 	}
 
@@ -129,13 +130,16 @@ const typeDefs = gql`
 		getCreditRequests: [CreditRequest]
 		getCreditRequestsByClient(client: ID!): [CreditRequest]
 
+		getCreditState(id: ID!): CreditState
+		getCreditStates: [CreditState]
+
 		getCreditResponse(id: ID!): CreditResponse
 		getCreditResponseByCreditRequest(creditRequest: ID!): [CreditResponse]
 		getCreditResponses: [CreditResponse]
 		getCreditResponsesByClient(client: ID!): [CreditResponse]
 
-		getCreditState(id: ID!): CreditState
-		getCreditStates: [CreditState]
+		getCredit(id: ID!): Credit
+		getCredits: [Credit]
 	}
 
 	type Mutation {
@@ -150,6 +154,10 @@ const typeDefs = gql`
 		createCreditRequest(creditRequest: CreditRequestInput!): CreditRequest
 		updateCreditRequest(id: ID!, creditRequest: CreditRequestInput!): CreditRequest
 		deleteCreditRequest(id: ID!): CreditRequest
+
+		createCreditState(creditState: CreditStateInput!): CreditState
+		updateCreditState(id: ID!, creditState: CreditStateInput!): CreditState
+		deleteCreditState(id: ID!): CreditState
 
 		createCreditResponse(creditResponse: CreditResponseInput!): CreditResponse
 		updateCreditResponse(id: ID!, creditResponse: CreditResponseInput!): CreditResponse
