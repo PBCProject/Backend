@@ -12,10 +12,7 @@ const { createToken, decodeToken } = services;
 
 const authResolvers = {
 	Query: {
-		whoami: async (_, __, context) => {
-			console.log(context.user);
-			return context.user ? await User.findById(context.user._id) : null;
-		},
+		whoami: async (_, __, context) => (context.user ? await User.findById(context.user._id) : null),
 	},
 	Mutation: {
 		login: async (_, args, context) => {
