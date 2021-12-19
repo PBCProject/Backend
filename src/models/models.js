@@ -43,7 +43,7 @@ const user = new Schema({
 		required: false,
 		identificationType: {
 			type: String,
-			required: false,
+			required: true,
 		},
 		identification: {
 			type: String,

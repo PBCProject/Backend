@@ -13,13 +13,15 @@ const typeDefs = gql`
 		clientInfo: ClientInfo
 		email: String!
 		password: String!
-		createdAt: String!
-		updatedAt: String!
+		createdAt: String
+		updatedAt: String
 	}
 
 	type ClientInfo {
+		identificationType: String!
 		identification: String!
 		birthDate: String!
+		documentDate: String!
 		revenueValue: Float!
 		expensesValue: Float!
 	}
@@ -85,8 +87,10 @@ const typeDefs = gql`
 	}
 
 	input ClientInfoInput {
+		identificationType: String
 		identification: String
 		birthDate: String
+		documentDate: String
 		revenueValue: Float
 		expensesValue: Float
 	}

@@ -33,6 +33,7 @@ const resolvers = {
 		deleteRole: async (_, args) => await role.findByIdAndDelete(args.id),
 
 		createUser: async (_, args) => {
+			console.log(args);
 			if ((args.role == models.defaultRoleId || !args.role) && !args.user.clientInfo) throw new Error('Client info is required for default role');
 			return await new user(args.user).save();
 		},
