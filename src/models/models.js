@@ -41,11 +41,19 @@ const user = new Schema({
 	clientInfo: {
 		type: Object,
 		required: false,
+		identificationType: {
+			type: String,
+			required: false,
+		},
 		identification: {
 			type: String,
 			required: true,
 		},
 		brithDate: {
+			type: Date,
+			required: true,
+		},
+		documentDate:{
 			type: Date,
 			required: true,
 		},
