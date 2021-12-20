@@ -29,7 +29,7 @@ const typeDefs = gql`
 	type CreditRequest {
 		id: ID!
 		client: User!
-		fees: Int!
+		term: Int!
 		amountReq: Int
 		createdAt: String!
 	}
@@ -71,7 +71,7 @@ const typeDefs = gql`
 		credit: Credit!
 		date: String!
 		reason: String!
-		fees: Int!
+		term: Int!
 	}
 
 	type ExtensionResponse {
@@ -106,7 +106,7 @@ const typeDefs = gql`
 
 	input CreditRequestInput {
 		client: ID
-		fees: Int
+		term: Int
 		amountReq: Int		
 		createdAt: String
 	}

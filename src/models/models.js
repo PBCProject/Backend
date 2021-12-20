@@ -85,7 +85,7 @@ const creditRequest = new Schema({
 		required: true,
 		autopopulate: true,
 	},
-	fees: {
+	term: {
 		type: Number,
 		required: true,
 	},
