@@ -30,8 +30,7 @@ const typeDefs = gql`
 		id: ID!
 		client: User!
 		fees: Int!
-		amount: Int!
-		interest: Float!
+		amountReq: Int
 		createdAt: String!
 	}
 
@@ -39,6 +38,8 @@ const typeDefs = gql`
 		id: ID!
 		creditRequest: CreditRequest!
 		admin: User!
+		interest: Float!
+		amountAproved: Int!
 		message: String!
 		isApproved: Boolean!
 		createdAt: String!
@@ -106,14 +107,15 @@ const typeDefs = gql`
 	input CreditRequestInput {
 		client: ID
 		fees: Int
-		amount: Int
-		interest: Float
+		amountReq: Int		
 		createdAt: String
 	}
 
 	input CreditResponseInput {
 		creditRequest: ID
 		admin: ID
+		interest: Float
+		amountAproved: Int
 		message: String
 		isApproved: Boolean
 	}

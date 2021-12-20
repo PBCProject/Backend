@@ -89,14 +89,9 @@ const creditRequest = new Schema({
 		type: Number,
 		required: true,
 	},
-	amount: {
+	amountReq: {
 		type: Number,
 		required: true,
-	},
-	interest: {
-		type: Number,
-		required: true,
-		default: 0,
 	},
 	createdAt: {
 		type: Date,
@@ -120,6 +115,16 @@ const creditResponse = new Schema({
 	message: {
 		type: String,
 		required: true,
+	},
+	interest: {
+		type: Number,
+		required: true,
+		default: 0,
+	},
+	amountAproved: {
+		type: Number,
+		required: true,
+		default: 0,
 	},
 	isApproved: {
 		type: Boolean,
