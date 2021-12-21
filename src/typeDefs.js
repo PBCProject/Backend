@@ -32,6 +32,7 @@ const typeDefs = gql`
 		term: Int!
 		amountReq: Int
 		createdAt: String!
+		isApproved: Boolean
 	}
 
 	type CreditResponse {
@@ -107,7 +108,7 @@ const typeDefs = gql`
 	input CreditRequestInput {
 		client: ID
 		term: Int
-		amountReq: Int		
+		amountReq: Int
 		createdAt: String
 	}
 
@@ -146,6 +147,7 @@ const typeDefs = gql`
 
 		getCredit(id: ID!): Credit
 		getCredits: [Credit]
+		getCreditsByClient(client: ID!): [Credit]
 	}
 
 	type Mutation {

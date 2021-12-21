@@ -12,7 +12,7 @@ const { createToken, decodeToken } = services;
 
 const authResolvers = {
 	Query: {
-		whoami: async (_, __, context) => (context.user ? await User.findById(context.user._id) : null),
+		whoiam: async (_, __, context) => (context.user ? await User.findById(context.user._id) : null),
 	},
 	Mutation: {
 		login: async (_, args, context) => {
@@ -37,7 +37,7 @@ const authTypeDefs = gql`
 	}
 
 	type Query {
-		whoami: User
+		whoiam: User
 	}
 
 	type Mutation {
